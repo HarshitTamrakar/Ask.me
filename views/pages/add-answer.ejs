@@ -1,0 +1,43 @@
+<%- include("../templates/header") -%>
+<div class="container">
+<div class="box">
+
+  <div class="question-box">
+    <% let questionId = question._id; %>
+    <% let questionTitle = question.title; %>
+    <% let questionDescription = question.description; %>
+    <% let questionURL = question.imageURL; %>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-lg-11">
+              <%=questionId%>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="question-title">
+            <h2><%= questionTitle %></h2>
+          </div>
+          <div class="question-body">
+            <p><%= questionDescription %></p>
+          </div>
+        </div>
+        </div>
+  </div>
+
+  <div class="answer-box">
+  <form action="/add-answer" method="post">
+      <div class="form-group">
+        <label for="answer" class="label"></label>
+        <textarea name="answer" rows="8" cols="80" placeholder="Write your answer here" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="answerImagerURL" class="label">Image URL</label>
+        <input type="url" name="answerImagerURL" class="form-control" placeholder="Enter Image URL Here">
+      </div>
+      <button type="submit" name="submit" value="<%=questionId%>" class="btn btn-lg btn-success">Answer</button>
+    </form>
+  </div>
+</div>
+<%- include("../templates/footer") -%>

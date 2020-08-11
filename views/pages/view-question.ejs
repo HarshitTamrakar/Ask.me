@@ -1,0 +1,96 @@
+<%- include('../templates/header') -%>
+<div class="container">
+
+        <% let questionID = question._id; %>
+        <% let questionTitle = question.title; %>
+        <% let questionDescription = question.description; %>
+        <% let questionURL = question.imageURL; %>
+        <% let answers = question.answers %>
+        <% let status = "Answered" %>
+        <% let color = "bg-success text-light border-success" %>
+        <% let border = "border-success"; %>
+
+        <% if(answers.length == 0) { %>
+          <% color = "bg-warning text-body border-warning"%>
+          <% border = "border-warning"; %>
+          <% status = "Pending" %>
+        <% } %>
+
+        <div class="card-box">
+          <div class="card <%= border %> h-100">
+            <div class="card-header <%=color%>">
+              <div class="row">
+                <div class="col-lg-11">
+                  <h5 class="h5"><%=status%></h5>
+                </div>
+                <div class="col-lg-1">
+                  <div class="remove">
+                    <a href="/remove/question/<%=questionID%>" clas>X</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="question-title">
+                <h2><%= questionTitle %></h2>
+              </div>
+              <div class="question-body">
+                <p><%= questionDescription %></p>
+              </div>
+            </div>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-lg">
+                    <a href="/add-answer/<%=questionID%>"><button type="submit" name="answer" class="btn btn-lg btn-success form-control">Answer</button></a>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <% for(let i = 0; i < answers.length; i++) { %>
+              <% let answer = answers[i];%>
+              <% let answerId = answer._id; %>
+              <% let answerText = answer.answer %>
+              <% let upvotes = Number(answer.upvotes);%>
+              <% let downvotes = Number(answer.downvotes);%>
+              <% let votes = Number(upvotes - downvotes); %>
+              <% let color = "bg-success text-light"; %>
+              <% if(votes < 0) { %>
+                <% color = "bg-danger text-light"; %>
+              <% } else if(votes === 0) { %>
+                <% color = "bg-info text-light"; %>
+              <% } %>
+              <div class="col-lg-6">
+                <div class="answer-box">
+                  <div class="card border-success">
+                    <div class="card-header border-success">
+                      Answer: <%= i + 1 %>
+                    </div>
+                    <div class="card-body">
+                      <div class="question-body">
+                        <h4 class="h5"><%= answerText %></h4>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <div class="row form-group">
+                        <div class="col-lg">
+                          <form action="/upvote/<%=questionID%>/<%=answerId%>" method="post">
+                            <button type="submit" name="upvote" class="btn btn-lg btn-success form-control"><%=upvotes%>  Upvotes</button>
+                          </form>
+                        </div>
+                        <div class="col-lg">
+                          <form action="/downvote/<%=questionID%>/<%=answerId%>" method="post">
+                            <button type="submit" name="upvote" class="btn btn-lg btn-danger form-control"><%=downvotes%>  Downvotes</button>
+                          </form>
+                        </div>
+                      </div>
+                      <label class="form-control text-center <%=color%>"><%=votes%>  Votes</label>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+<%- include('../templates/footer') %>

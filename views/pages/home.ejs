@@ -1,5 +1,71 @@
 <%- include('../templates/header') -%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 left-pane bg-light">
+      <% for(let i = 0; i < questionList.length; i++) {%>
+        <% let question = questionList[i]; %>
+        <% let questionID = question._id; %>
+        <% let questionTitle = question.title; %>
+        <div class="box-link">
+          <a href="/view/<%= questionID %>"> <%= questionTitle %> </a>
+        </div>
+      <% } %>
+    </div>
+    <div class="col-lg right-pane">
+      <div class="row">
+        <% for(let i = 0; i < questionList.length; i++) {%>
+          <% let question = questionList[i]; %>
+          <% let questionID = question._id; %>
+          <% let questionTitle = question.title; %>
+          <% let questionDescription = question.description; %>
+          <% let questionURL = question.imageURL; %>
+          <% let answers = question.answers %>
+          <% let status = "Answered" %>
+          <% let color = "bg-success text-light border-success" %>
+          <% let border = "border-success"; %>
+          <% if(answers.length == 0) { %>
+            <% color = "bg-warning text-body border-warning"%>
+            <% border = "border-warning"; %>
+            <% status = "Pending" %>
+          <% } %>
+          <div class="card-box bg-light border border-dark col-lg-5">
+            <div class="card <%= border %>">
+              <div class="card-header <%=color%>">
+                <div class="row">
+                  <div class="col-lg-11">
+                    <h5 class="h5"><%=status%></h5>
+                  </div>
+                  <div class="col-lg-1">
+                    <div class="remove bg-light">
+                      <a href="/remove/question/<%=questionID%>" clas>X</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="question-title">
+                  <h2><%= questionTitle %></h2>
+                </div>
+                <div class="question-body">
+                  <p><%= questionDescription %></p>
+                </div>
+              </div>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-lg">
+                      <a href="/add-answer/<%=questionID%>"><button type="submit" name="answer" class="btn btn-lg btn-success form-control">Answer</button></a>
+                  </div>
+                  <div class="col-lg">
+                      <a href="/view/<%=questionID%>"><button type="submit" name="view" class="btn btn-lg btn-info form-control">View</button></a>
+                  </div>
+                </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
 
-<p>home</p>
+    </div>
+  </div>
 
-<%- include('../templates/footer') -%>
+<%- include('../templates/footer') %>
