@@ -70,7 +70,7 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-5">
-                          <a href="<%= answerUrl %>"><img src="<%=answerUrl%>" alt="" class="rounded float-left img-thumbnail image"></a>
+                          <a href="<%=answerUrl%>"><img src="<%=answerUrl%>" alt="" class="rounded float-left img-thumbnail image"></a>
                         </div>
                         <div class="col-lg col-md col-sm">
                           <div class="question-title">
@@ -81,12 +81,12 @@
                     </div>
                     <div class="card-footer">
                       <div class="row form-group">
-                        <div class="col-lg">
+                        <div class="col-lg col-md col-sm">
                           <form action="/upvote/<%=questionID%>/<%=answerId%>" method="post">
                             <button type="submit" name="upvote" class="btn btn-lg btn-success form-control"><%=upvotes%>  Upvotes</button>
                           </form>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg col-md col-sm">
                           <form action="/downvote/<%=questionID%>/<%=answerId%>" method="post">
                             <button type="submit" name="upvote" class="btn btn-lg btn-danger form-control"><%=downvotes%>  Downvotes</button>
                           </form>

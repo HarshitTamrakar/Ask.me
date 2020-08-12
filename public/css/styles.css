@@ -48,10 +48,12 @@
 
 .image{
   height: 150px;
+  width: 150px;
 }
 
 .image-lg{
   height: 300px;
+  width: 300px;
 }
 
 .card-box{
