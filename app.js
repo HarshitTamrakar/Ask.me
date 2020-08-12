@@ -7,7 +7,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.get("/home", function(req, res){
   db.getAllQuestions(function(err, questionList){
@@ -49,7 +49,6 @@ app.get("/add-answer/:id", function(req, res){
     if(err){
       console.log(err);
     }else{
-      console.log(question);
       res.render("pages/add-answer", {
         question: question
       })
@@ -93,7 +92,6 @@ app.get("/view/:questionID", function(req, res){
     if(err){
       console.log(err);
     }else{
-      console.log(question);
       res.render("pages/view-question", {
         question: question
       })

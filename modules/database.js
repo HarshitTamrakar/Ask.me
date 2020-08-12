@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/quoraDB");
+mongoose.connect("mongodb+srv://admin-harshit:Test123@cluster0.ybqjn.mongodb.net/quoraDB");
 
 const answerSchema = mongoose.Schema({
   answer: String,
