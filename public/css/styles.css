@@ -46,6 +46,10 @@
   border-radius: 20px;
 }
 
+.image{
+  height: 150px;
+}
+
 .card-box{
   margin: 20px 15px 10px 15px;
   border-radius: 20px;

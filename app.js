@@ -8,12 +8,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
 const port = process.env.PORT || 3000;
+const sample_image = "https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg";
 
 app.get("/home", function(req, res){
   db.getAllQuestions(function(err, questionList){
     if(err){
       console.log(err);
     }else{
+      questionList.forEach(function(question){
+        if(!question.questionImageURL){
+          question.questionImageURL = sample_image;
+          question.save();
+        }
+      });
       res.render("pages/home", {
         questionList: questionList
       });
@@ -33,7 +40,11 @@ app.post("/add-question", function(req, res){
   let questionBody = req.body;
   let questionTitle = questionBody.questionTitle;
   let questionDescription = questionBody.questionDescription;
-  let questionURL = questionBody.questionURL;
+  let questionURL = questionBody.questionImageURL;
+  console.log(questionBody);
+  if(questionURL == ""){
+    questionURL = sample_image;
+  }
   let question = {
     title: questionTitle,
     description: questionDescription,
@@ -61,7 +72,7 @@ app.post("/add-answer/", function(req, res){
   let id = body.submit;
   let answerText = body.answer;
   let answerImageURL = body.answerImageURL;
-  if(answerImageURL == null){
+  if(!answerImageURL){
     answerImageURL = "";
   }
   db.insertAnswer(id, answerText, answerImageURL);
