@@ -72,8 +72,9 @@ app.post("/add-answer/", function(req, res){
   let id = body.submit;
   let answerText = body.answer;
   let answerImageURL = body.answerImageURL;
+  console.log(answerImageURL);
   if(!answerImageURL){
-    answerImageURL = "";
+    answerImageURL = sample_image;
   }
   db.insertAnswer(id, answerText, answerImageURL);
   res.redirect("/view/" + id);

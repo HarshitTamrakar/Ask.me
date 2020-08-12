@@ -50,6 +50,10 @@
   height: 150px;
 }
 
+.image-lg{
+  height: 300px;
+}
+
 .card-box{
   margin: 20px 15px 10px 15px;
   border-radius: 20px;

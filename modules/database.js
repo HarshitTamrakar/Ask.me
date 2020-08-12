@@ -1,10 +1,10 @@
 let mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/quoraDB");
-// mongoose.connect("mongodb+srv://admin-harshit:Test123@cluster0.ybqjn.mongodb.net/quoraDB");
+// mongoose.connect("mongodb://localhost:27017/quoraDB");
+mongoose.connect("mongodb+srv://admin-harshit:Test123@cluster0.ybqjn.mongodb.net/quoraDB");
 
 const answerSchema = mongoose.Schema({
   answer: String,
-  url: String,
+  imageURL: String,
   upvotes: Number,
   downvotes: Number
 });
@@ -46,7 +46,7 @@ exports.getQuestion = function(id, callback){
 exports.insertAnswer = function(id, answerText, answerImageURL){
   let answer = {
     answer: answerText,
-    url: answerImageURL,
+    imageURL: answerImageURL,
     upvotes: 0,
     downvotes: 0
   }

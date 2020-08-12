@@ -24,11 +24,18 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="question-title">
-                <h2><%= questionTitle %></h2>
-              </div>
-              <div class="question-body">
-                <p><%= questionDescription %></p>
+              <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                  <a href="<%=questionURL%>"><img src="<%=questionURL%>" alt="" class="rounded float-left img-thumbnail image-lg"></a>
+                </div>
+                <div class="col-lg col-md col-sm">
+                  <div class="question-title">
+                    <h2><%= questionTitle %></h2>
+                  </div>
+                  <div class="question-body">
+                    <p><%= questionDescription %></p>
+                  </div>
+                </div>
               </div>
             </div>
             </div>
@@ -43,7 +50,8 @@
             <% for(let i = 0; i < answers.length; i++) { %>
               <% let answer = answers[i];%>
               <% let answerId = answer._id; %>
-              <% let answerText = answer.answer %>
+              <% let answerText = answer.answer; %>
+              <% let answerUrl = answer.imageURL; %>
               <% let upvotes = Number(answer.upvotes);%>
               <% let downvotes = Number(answer.downvotes);%>
               <% let votes = Number(upvotes - downvotes); %>
@@ -60,8 +68,15 @@
                       Answer: <%= i + 1 %>
                     </div>
                     <div class="card-body">
-                      <div class="question-body">
-                        <h4 class="h5"><%= answerText %></h4>
+                      <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                          <a href="<%= answerUrl %>"><img src="<%=answerUrl%>" alt="" class="rounded float-left img-thumbnail image"></a>
+                        </div>
+                        <div class="col-lg col-md col-sm">
+                          <div class="question-title">
+                            <h5 class="h5"><%= answerText %></h5>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="card-footer">
